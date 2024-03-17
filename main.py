@@ -1,10 +1,10 @@
 import os
-import login
-import helpers
+from login import Login
+from helpers import Bankapp
 
 def main():
     os.system('cls' if os.name == 'nt' else 'clear')
-    user = None  
+    user = None #set the current user to none
 
     while True:
         print("WELCOME TO OJOGU'S BANK")
@@ -20,49 +20,50 @@ def main():
     if user_input == 1:
         email = input("Email: ")
         password = input("Password: ")
-        user_login = login.Login(email, password)
-        if user_login.validate_login():
+        user_login = Login()
+        if user_login.validate_login(email, password):
             user = user_login  # Set user to the logged-in user
         else:
             print("Invalid login. Would you like to sign up? (yes/no)")
             if input().lower() == 'yes':
                 user_login.signup()
-                user = user_login  # Set user to the newly signed-up user
+                user = user_login  # Set user to the newly signed-up user 
                 
     elif user_input == 2:
-        email = input("Email: ")
-        password = input("Password: ")
-        user = login.Login(email, password)
+        user = Login()
         user.signup()
 
     if user:  # Check if user is set (either logged in or signed up)
         while True:
-            print("1. View Account Details\n")
-            print("2. Deposit Money\n")
-            print("3. Withdraw Money\n")
-            print("4. Check Balance\n")
-            print("5. Transaction History\n")
-            print("6. Update an account information\n")
-            print("7. Exit\n")
+            print("1. Create account\n")
+            print("2. View Account Details\n")
+            print("3. Deposit Money\n")
+            print("4. Withdraw Money\n")
+            print("5. Check Balance\n")
+            print("6. Transaction History\n")
+            print("7. Update an account information\n")
+            print("8. Exit\n")
                     
             choice = input("Enter your choice: ")
             os.system('cls' if os.name == 'nt' else 'clear')
             if choice.isdigit():
                 choice = int(choice)
-                customers = helpers.Bank()  
+                customers = Bankapp()  
                 if choice == 1:
-                    customers.view_acct_details()
+                    customers.create_account()
                 elif choice == 2:
-                    customers.deposit()
+                    customers.view_deposit()
                 elif choice == 3:
-                    customers.withdraw()
+                    customers.deposit()
                 elif choice == 4:
-                    customers.check_balance()
+                    customers.withdraw()
                 elif choice == 5:
-                    customers.transaction_history()
+                    customers.check_balance()
                 elif choice == 6:
-                    customers.update_account_info()
+                    customers.transaction_history()
                 elif choice == 7:
+                    customers.update_account_info()
+                elif choice == 8:
                     break
                 else:
                     print("Enter a valid choice")
