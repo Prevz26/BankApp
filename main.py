@@ -52,7 +52,7 @@ def main():
                 if choice == 1:
                     customers.create_account()
                 elif choice == 2:
-                    customers.view_deposit()
+                    customers.view_account_details()
                 elif choice == 3:
                     customers.deposit()
                 elif choice == 4:
